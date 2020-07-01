@@ -6,7 +6,7 @@ Deno modules fetched from deno.land with search and rating.
 
 ## Web Url
 
-[denostars.000webhostapp.com](https://denostars.000webhostapp.com/)
+[deno-stars.vercel.app](https://deno-stars.vercel.app/)
 
 ## Download Electron App flavour
 

@@ -1,6 +1,6 @@
 {
   "name": "denostars",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Deno modules as it should be!",
   "productName": "Deno Stars",
   "author": "Sameh Fakoua <s.fakoua@gmail.com>",

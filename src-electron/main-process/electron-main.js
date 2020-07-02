@@ -23,7 +23,6 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    fullscreen: true,
     useContentSize: true,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;

@@ -86,7 +86,7 @@ import Fuse from 'fuse.js'
 export default {
   name: 'DenoStars',
   mounted () {
-    const databaseUrl = this.$q.platform.is.electron ? 'https://denostars.000webhostapp.com/' : '/'
+    const databaseUrl = this.$q.platform.is.electron ? 'https://deno-stars.vercel.app/' : '/'
     this.$axios
       .get(databaseUrl + 'database.json')
       .then((res) => {

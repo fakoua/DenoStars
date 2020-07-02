@@ -10,14 +10,31 @@ let res = await req.json()
 let repos: any[] = [];
 
 let counter: number = 0;
-
 for (const repo in res) {
     console.log(`Fetching ${repo} - ${++counter}`)
     //@ts-ignore
     let github = await fetchRepo(res[repo])
     if (github.owner !== undefined) {
-        let db = githubToDb(github)
-        repos.push(db)
+
+        if (github.archived) {
+            console.log(`-------------- Repository ${repo} is archived.`)
+        }
+
+        if (github.disabled) {
+            console.log(`-------------- Repository ${repo} is disabled.`)
+        }
+
+        if (!github.archived) {
+            let db = githubToDb(github)
+            let old = repos.find((item) => item.name === github.name && item.owner === github.owner.login)
+            if (old === undefined) {
+                repos.push(db)
+            }
+            else {
+                console.log(`Repository ${repo} is duplicated`)
+            }
+            
+        }
     }
 }
 

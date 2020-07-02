@@ -25,16 +25,6 @@
                 <q-item-label caption lines="2">The Progressive JavaScript Framework.</q-item-label>
                 </q-item-section>
             </q-item>
-            <q-item clickable v-ripple href="https://fusejs.io/" tag="a" target="_blank">
-                <q-item-section avatar>
-                <q-icon color="primary" name="open_in_new" />
-                </q-item-section>
-
-                <q-item-section>
-                    <q-item-label>Fuse.js</q-item-label>
-                <q-item-label caption lines="2">Fuse.js is a powerful, lightweight fuzzy-search library, with zero dependencies.</q-item-label>
-                </q-item-section>
-            </q-item>
         </q-list>
         <h6>Author</h6>
         <q-card class="my-card" flat bordered>

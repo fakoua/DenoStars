@@ -2,14 +2,50 @@
   <div class="q-pa-md">
     <q-table
       title="Deno Modules"
-      :data="filtered"
+      :data="database"
       :columns="columns"
       :pagination="initialPagination"
       :loading="loading"
       :dense="isDense"
       :grid="isGrid"
       key="name"
+      :filter="filter"
     >
+    <template v-slot:item="props">
+      <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+          <q-card>
+            <q-card-section class="text-center">
+              <a :href="props.row.url" target="_blank" class="clean big">
+                <q-icon name="open_in_new" class="q-ml-xs" />
+                {{ props.row.owner }}/{{ props.row.name }}
+              </a>
+              <br>
+              {{ props.row.description }}
+            </q-card-section>
+            <q-card-section>
+              <div class="row justify-between">
+                <div>
+                    <q-badge v-if="props.row.open_issues == 0" color="green">
+                    Issues: <q-icon name="thumb_up" color="white" class="q-ml-xs" />
+                  </q-badge>
+                    <q-badge v-if="props.row.open_issues != 0" color="red">
+                      Issues: {{ props.row.open_issues }} <q-icon name="warning" color="white" class="q-ml-xs" />
+                    </q-badge>
+                </div>
+                <div>
+                  <q-badge color="blue">
+                      Forks: {{ props.row.forks }}
+                    </q-badge>
+                </div>
+              </div>
+            </q-card-section>
+            <q-separator ></q-separator>
+            <q-card-section class="flex flex-center grade">
+              <div><q-icon name="grade" />{{ props.row.stars }}</div>
+            </q-card-section>
+          </q-card>
+        </div>
+    </template>
       <template v-slot:body="props">
         <q-tr :props="props">
            <q-td key="stars" :props="props">
@@ -49,9 +85,9 @@
         <q-inner-loading showing color="primary" />
       </template>
       <template v-slot:top="props">
-        <div class="col q-table__title">Deno Modules</div>
+        <div class="col q-table__title" v-if="!$q.platform.is.mobile">Deno Modules</div>
         <div class="col">
-          <q-input dense class="q-ml-md" v-model="filter">
+          <q-input dense class="q-ml-md" v-model="filter" label="Filter ...">
           <template v-slot:append>
             <q-icon v-if="filter === ''" name="search" />
             <q-icon v-else name="clear" class="cursor-pointer" @click="filter = ''" />
@@ -59,7 +95,7 @@
         </q-input>
         </div>
         <q-space />
-        <div class="col">
+        <div class="col" v-if="!$q.platform.is.mobile">
           <q-toggle label="Dense" v-model="isDense" />
         </div>
         <div class="col">
@@ -81,8 +117,6 @@
 </template>
 
 <script>
-import Fuse from 'fuse.js'
-
 export default {
   name: 'DenoStars',
   mounted () {
@@ -91,8 +125,6 @@ export default {
       .get(databaseUrl + 'database.json')
       .then((res) => {
         this.database = res.data
-        this.filtered = res.data
-        this.fuse = new Fuse(this.database, this.options)
       })
       .catch((err) => {
         console.log(err)
@@ -115,30 +147,8 @@ export default {
   data () {
     return {
       database: [],
-      filtered: [],
       fetchDate: '',
       filter: '',
-      options: {
-        // isCaseSensitive: false,
-        // includeScore: false,
-        // shouldSort: true,
-        // includeMatches: false,
-        // findAllMatches: false,
-        // minMatchCharLength: 1,
-        // location: 0,
-        // threshold: 0.6,
-        // distance: 100,
-        // useExtendedSearch: false,
-        // ignoreLocation: false,
-        // ignoreFieldNorm: false,
-        threshold: 0.1,
-        keys: [
-          'name',
-          'description',
-          'owner'
-        ]
-      },
-      fuse: null,
       isDense: true,
       isGrid: false,
       initialPagination: {
@@ -159,24 +169,17 @@ export default {
         { name: 'updated', label: 'Updated', field: 'updated', align: 'left', sortable: true }
       ]
     }
-  },
-  watch: {
-    filter (val) {
-      if (val === '' || val === undefined) {
-        this.filtered = this.database
-      } else {
-        const result = this.fuse.search(val)
-        this.filtered = []
-        result.forEach(element => {
-          this.filtered.push(element.item)
-        })
-      }
-    }
   }
 }
 </script>
 <style scoped>
 a.clean {
   text-decoration: none;
+}
+a.clean.big {
+font-size: 20px;
+}
+.grade {
+  font-size: 18px;
 }
 </style>

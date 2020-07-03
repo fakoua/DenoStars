@@ -11,7 +11,8 @@
     "test": "echo \"No test specified\" && exit 0",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
-    "build:electron": "quasar build -m electron"
+    "build:electron": "quasar build -m electron",
+    "deno": "deno run -A ./importer.ts"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

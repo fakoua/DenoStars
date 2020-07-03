@@ -4,7 +4,7 @@ os:
 - osx
 language: node_js
 node_js:
-- '12'
+- 'latest'
 script:
-- yarn install
-- yarn build:electron
+- npm install
+- npm run build:electron

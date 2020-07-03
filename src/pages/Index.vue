@@ -150,7 +150,7 @@ export default {
       fetchDate: '',
       filter: '',
       isDense: true,
-      isGrid: false,
+      isGrid: this.$q.platform.is.mobile === true,
       initialPagination: {
         sortBy: 'asc',
         descending: false,

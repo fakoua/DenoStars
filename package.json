@@ -12,6 +12,7 @@
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
     "build:electron": "quasar build -m electron",
+    "dev": "quasar dev",
     "deno": "deno run -A ./importer.ts"
   },
   "dependencies": {

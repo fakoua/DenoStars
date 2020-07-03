@@ -1,5 +1,4 @@
-# Deno Stars (denostars)
-
+# Deno Stars
 Deno modules as it should be!
 
 Deno modules fetched from deno.land with search and rating.

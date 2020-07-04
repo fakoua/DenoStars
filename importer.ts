@@ -38,12 +38,15 @@ for (const repo in res) {
     }
 }
 
+// rename the old file
+console.log("Rename the old database")
+await Deno.rename("./public/database.json", "./public/database-old.json")
 //@ts-ignore
 let sortedJson = repos.sort((n1, n2) => n2.stars - n1.stars)
 await writeJson("./public/database.json", sortedJson, {spaces: 1})
 let dt = moment().format()
 await writeFileStr('./public/fetch.txt', dt)
-console.log("Done")
+console.log(`Done, found ${sortedJson.length} repositories.`)
 
 function githubToDb(github: any): any {
     let res = {

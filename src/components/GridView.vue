@@ -142,3 +142,14 @@ export default {
   }
 }
 </script>
+<style scoped>
+a.clean {
+  text-decoration: none;
+}
+a.clean.big {
+font-size: 20px;
+}
+.grade {
+  font-size: 18px;
+}
+</style>

@@ -1,6 +1,6 @@
 tasks:
   - command: yarn install
   - command: curl -fsSL https://deno.land/x/install/install.sh | sh
-  - command: /home/gitpod/.deno/bin/deno run -A importer.ts
+  - command: echo "/home/gitpod/.deno/bin/deno run -A importer.ts"
 ports:
   - port: 8080
